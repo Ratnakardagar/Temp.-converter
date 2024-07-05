@@ -1,0 +1,192 @@
+<!doctype html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>Temperature Converter</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: url('back2.jpg');
+            display: flex;
+            justify-content: center;
+            margin-top: 150px;
+        }
+
+        .container {
+            max-width: 450px;
+            background-color: black;
+            border-radius: 8px;
+            box-shadow: 0px 0px 59px #0ef;
+            font-family: sans-serif;
+            padding: 20px;
+
+        }
+
+        .container:hover {
+            animation: animate 1s linear infinite;
+        }
+
+        @keyframes animate {
+            100% {
+                filter: hue-rotate(360deg);
+            }
+        }
+
+        .title {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap-reverse;
+            gap: 10px;
+        }
+
+        .Temperature-icon {
+            font-size: 45px;
+            color: #fff;
+        }
+
+        h1 {
+            color: #fff;
+            letter-spacing: 1.2px;
+            font-size: 30px;
+        }
+
+        #nishantc,
+        #nishantf,
+        #nishantk {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 25px;
+        }
+
+        input {
+            flex: 5;
+            height: 60px;
+            font-size: 20px;
+            font-weight: 600;
+            text-align: center;
+            border: none;
+            outline: none;
+            border-radius: 8px 0 0 8px;
+            padding: 0 10px;
+        }
+
+        /* for chrome, safari, Edge, Opera */
+        input::-webkit-outer-spin-button,
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+        }
+
+
+        .icon {
+            flex: 1;
+            height: 60px;
+            line-height: 60px;
+            padding: 0 5px;
+            text-align: center;
+            font-size: 30px;
+            background: #4d5964;
+            color: #fff;
+            border-radius: 0 8px 8px 0;
+        }
+
+        .button {
+            margin-top: 25px;
+            text-align: center;
+        }
+
+        .button button {
+            border: none;
+            outline: none;
+            padding: 10px 30px;
+            font-size: 20px;
+            font-weight: 600;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .button button:hover {
+            background: #000;
+            color: white;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="title">
+            <h1>Temperature Converter</h1>
+            <span class="Temperature-icon"> <i class="fa-solid fa-temperature-three-quarters"></i></span>
+        </div>
+        <div id="nishantc"><input type="number" id="celsius" placeholder="celsius" value="0">
+            <span class="icon">&#8451</span>
+        </div>
+        <div id="nishantf"><input type="number" id="fahrenheit" placeholder="fahrenheit" value="32">
+            <span class="icon">&#8457</span>
+        </div>
+        <div id="nishantk"><input type="number" id="kelvin" placeholder="kelvin" value="273.15">
+            <span class="icon">&#8490</span>
+        </div>
+
+        <div class="button">
+            <button id="clear">All Clear</button>
+        </div>
+
+    </div>
+    <!--<script src="code.js"></script>-->
+    <script>
+        const inputs = document.querySelectorAll(".container input");
+        const celsiusInput = document.querySelector("#celsius");
+        const fahrenheitInput = document.querySelector("#fahrenheit");
+        const kelvinInput = document.querySelector("#kelvin");
+        inputs.forEach(input => {
+
+            // now adding input event for all inputs
+            input.addEventListener("input", e => {
+                // get id from the input takes place on
+                const unit = e.target.id;
+                // now get the value from input take place on
+                const v = parseInt(e.target.value)            //parse INT change stirng to variable
+                // for celcius
+                if (unit == "celsius") {
+                    // conver value to farnite
+                    fahrenheitInput.value = parseFloat((v * 1.8) + 32).toFixed(4) * 1;  // parse flot and tofix is use to set the range of maximum decimles
+                    kelvinInput.value = parseFloat(v + 273.15).toFixed(4) * 1;
+                }
+                else if (unit == "fahrenheit") {
+                    celsiusInput.value = parseFloat((v - 32) * 5 / 9).toFixed(4) * 1;
+                    kelvinInput.value = parseFloat(((v - 32) * 5 / 9) + 273.15).toFixed(4) * 1;
+                }
+                else if (unit == "kelvin") {
+                    celsiusInput.value = parseFloat(v - 273.15).toFixed(4) * 1;
+                    fahrenheitInput.value = parseFloat(((v - 273.15) * 9 / 5) + 32).toFixed(4) * 1;
+                }
+            })
+        });
+
+        clear.addEventListener('click',clearInputs);
+        function clearInputs() {
+            celsiusInput.value=""
+            fahrenheitInput.value=""
+            kelvinInput.value=""
+        }
+    </script>
+</body>
+
+</html>
